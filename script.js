@@ -1,6 +1,8 @@
 const options = ['ROCK', 'PAPER', 'SCISSORS'];
 let playerScore = 0;
 let computerScore = 0;
+let playCount = 0;
+
 
 function computerPlay() {
   return options[Math.floor(Math.random() * 3)];
@@ -22,8 +24,10 @@ function playRound() {
   let playerSelection = playerPlay();
   let computerSelection = computerPlay();
   let win;
+  let finalMsg = '';
 
   if (playerSelection == computerSelection) return "It's a draw!";
+  else playCount++;
 
   switch(playerSelection) {
     case 'ROCK':
@@ -40,21 +44,30 @@ function playRound() {
       break;
   }
 
-  let finalMsg = (
-    win ?
-    `You win! ${playerSelection} beats ${computerSelection}!` :
-    `Sorry, ${computerSelection} beats ${playerSelection}. You lose!`
-  );
+  if (win) {
+    finalMsg = `You win this round! ${playerSelection} beats ${computerSelection}!`;
+    playerScore++;
+  } else {
+    finalMsg = `You lose this round! ${computerSelection} beats ${playerSelection}!`;
+    computerScore++;
+  }
 
   return finalMsg;
 }
 
 function game() {
-  for (i=0; i<5; i++) {
+  while (playCount < 5) { // TODO: playCount might be unnecessary, because if this is "best of five rounds", then the first player to reach three points wins the game
     console.log(playRound());
   }
+  let winLose = (playerScore > computerScore)? "WIN" : "LOSE";
+  console.log( `You ${winLose} the game! \
+    FINAL SCORE: \
+    Human: ${playerScore} \
+    Computer: ${computerScore}`
+  );
 }
 
+game();
 
 
 //
