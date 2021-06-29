@@ -9,6 +9,7 @@ function computerPlay() {
 function playerPlay() {
   let playerEntry = prompt("Rock, Paper, or Scissors?").toUpperCase();
   return ( // TODO: This logic can be rewritten to avoid confusing anonymous IIFE below
+    // TODO: Also, write something to account for 'Cancel' on prompt
     options.includes(playerEntry) ? //if playerEntry value is one of the options
     playerEntry : //return the entry or
     (() => {     // if not, immediately invoke this function to alert user of error and prompt again
@@ -28,18 +29,13 @@ function playRound() {
 
   switch(playerSelection) {
     case 'ROCK':
-      // if (computerSelection == 'PAPER') win = false;
-      // else win = true;
       win = (computerSelection == 'PAPER') ? false : true;
-      
       break;
     case 'PAPER':
-      if (computerSelection == 'SCISSORS') win = false;
-      else win = true;
+      win = (computerSelection == 'SCISSORS') ? false : true;
       break;
     case 'SCISSORS':
-      if (computerSelection == 'ROCK') win = false;
-      else win = true;
+      win = (computerSelection == 'ROCK') ? false : true;
       break;
   }
 
