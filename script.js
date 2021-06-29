@@ -1,16 +1,16 @@
-const options = ['ROCK', 'PAPER', 'SCISSORS'];
+const playOptions = ['ROCK', 'PAPER', 'SCISSORS'];
 let playerScore = 0;
 let computerScore = 0;
 
 function computerPlay() {
-  return options[Math.floor(Math.random() * 3)];
+  return playOptions[Math.floor(Math.random() * 3)];
 }
 
 function playerPlay() {
   let playerEntry = prompt("Rock, Paper, or Scissors?").toUpperCase();
   return ( // TODO: This logic can be rewritten to avoid confusing anonymous IIFE below
     // TODO: Also, write something to account for 'Cancel' on prompt
-    options.includes(playerEntry) ? //if playerEntry value is one of the options
+    playOptions.includes(playerEntry) ? //if playerEntry value is one of the playOptions
     playerEntry : //return the entry or
     (() => {     // if not, immediately invoke this function to alert user of error and prompt again
       alert(`Sorry, that wasn't one of the choices.`);
