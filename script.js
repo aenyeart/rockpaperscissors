@@ -28,8 +28,10 @@ function playRound() {
 
   switch(playerSelection) {
     case 'ROCK':
-      if (computerSelection == 'PAPER') win = false;
-      else win = true;
+      // if (computerSelection == 'PAPER') win = false;
+      // else win = true;
+      win = (computerSelection == 'PAPER') ? false : true;
+      
       break;
     case 'PAPER':
       if (computerSelection == 'SCISSORS') win = false;
@@ -42,25 +44,22 @@ function playRound() {
   }
 
   if (win) {
-    finalMsg = `You win this round! ${playerSelection} beats ${computerSelection}!`;
     playerScore++;
+    finalMsg = `You win this round! ${playerSelection} beats ${computerSelection}!`;
   } else {
-    finalMsg = `You lose this round! ${computerSelection} beats ${playerSelection}!`;
     computerScore++;
+    finalMsg = `You lose this round! ${computerSelection} beats ${playerSelection}!`;
   }
-
+  finalMsg += `\nWins: ${playerScore} | Losses: ${computerScore}`
   return finalMsg;
 }
 
 function game() {
-  while (playerScore < 3 && computerScore < 3) { // I removed playCount because if this is "best of five rounds", then the first player to reach three points wins the game and total non-draw rounds will never exceed 5 anyway. 
+  while (playerScore < 3 && computerScore < 3) { // I removed playCount because if this is "best of five rounds", then the first player to reach three points wins the game and total non-draw rounds will never exceed 5 anyway.
     console.log(playRound());
   }
-  let winLose = (playerScore > computerScore)? "WIN" : "LOSE";
-  console.log( `You ${winLose} the game! \
-    FINAL SCORE: \
-    Human: ${playerScore} \
-    Computer: ${computerScore}`
+  let winLose = (playerScore > computerScore)? "WON" : "LOSE";
+  console.log( `You ${winLose} the game! \n\tFINAL SCORE: \nHuman: ${playerScore} | Computer: ${computerScore}`
   );
 }
 
