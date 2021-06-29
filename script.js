@@ -1,15 +1,28 @@
 const options = ['ROCK', 'PAPER', 'SCISSORS'];
+let playerScore = 0;
+let computerScore = 0;
 
 function computerPlay() {
   return options[Math.floor(Math.random() * 3)];
 }
+
 function playerPlay() {
   let playerEntry = prompt("Rock, Paper, or Scissors?").toUpperCase();
-  return (options.includes(playerEntry)) ? playerEntry : null; // TODO: replace null with alert and new prompt
+  return ( // TODO: This logic can be rewritten to avoid confusing anonymous IIFE below
+    options.includes(playerEntry) ? //if playerEntry value is one of the options
+    playerEntry : //return the entry or
+    (() => {     // if not, immediately invoke this function to alert user of error and prompt again
+      alert(`Sorry, that wasn't one of the choices.`);
+      return playerPlay();
+    })()
+  )
 }
-function playRound(playerSelection, computerSelection) {
 
+function playRound() {
+  let playerSelection = playerPlay();
+  let computerSelection = computerPlay();
   let win;
+
   if (playerSelection == computerSelection) return "It's a draw!";
 
   switch(playerSelection) {
@@ -36,15 +49,10 @@ function playRound(playerSelection, computerSelection) {
   return finalMsg;
 }
 
-
-let playerSelection = playerPlay();
-let computerSelection = computerPlay();
-
-if (playerSelection = null) {
-
-} else {
-  console.log(playerSelection);
-  playRound(playerSelection, computerSelection);
+function game() {
+  for (i=0; i<5; i++) {
+    console.log(playRound());
+  }
 }
 
 
