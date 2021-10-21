@@ -15,8 +15,8 @@ function playerPlay() {
   }
   if (playerEntry !== null && playerEntry !== undefined) {
     playerEntry = playerEntry.toUpperCase();      // converts entry to allcaps
-    if (!playOptions.includes(playerEntry)) {     // if playerEntry not in playOptions[]
-      alert(`Sorry, that wasn't one of the choices.`);  // alert user of error and prompt again
+    if (!playOptions.includes(playerEntry)) {     // if entry not one of options
+      alert(`Sorry, that wasn't one of the choices.`);  // alert and prompt again
       playerEntry = playerPlay();
     }
   }
@@ -58,11 +58,11 @@ function playRound() {
 }
 
 function game() {
-  while (playerScore < 3 && computerScore < 3) { // I removed playCount because if this is "best of five rounds", then the first player to reach three points wins the game and total non-draw rounds will never exceed 5 anyway.
+  while (playerScore < 3 && computerScore < 3) { // "best of five", so first player to reach three points wins the game.
     if (cancellation) return; // Aborts gameplay
     console.log(playRound());
   }
-  let winLose = (playerScore > computerScore)? "WON" : "LOSE";
+  let winLose = (playerScore > computerScore)? "WON" : "LOST";
   console.log( `You ${winLose} the game! \n\tFINAL SCORE: \nHuman: ${playerScore} | Computer: ${computerScore}`
   );
 }
